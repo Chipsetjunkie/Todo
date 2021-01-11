@@ -8,6 +8,7 @@ class Todo extends Component {
     input: '',
     list: [],
     completed: false,
+    edit:[]
   }
 
   componentDidMount() {
@@ -41,7 +42,8 @@ class Todo extends Component {
           id: uuidv4(),
           text: i,
           completed: false,
-          date: Date()
+          date: Date(),
+          modify:false,
         }]
     })
   }
@@ -62,6 +64,26 @@ class Todo extends Component {
     this.setState({ list: updated })
   }
 
+  editTask = id =>{
+    const updated = this.state.list.map(i => {
+      if (i.id === id) {
+        i.modify= !i.modify
+      }
+      return i
+    })
+    this.setState({ list: updated })
+  }
+
+  editTaskContent =(e,id) =>{
+    const updated = this.state.list.map(i => {
+      if (i.id === id) {
+        i.text= e.target.value
+      }
+      return i
+    })
+    this.setState({ list: updated })
+  }
+
   showTasks = () => {
     if (this.state.list) {
       let tasks = this.state.list.filter(i => i.text.includes(this.state.input))
@@ -74,7 +96,9 @@ class Todo extends Component {
           key={i.id}
           {...i}
           complete={this.completeTask}
-          purge={this.deleteTask} />
+          purge={this.deleteTask} 
+          editTask={this.editTask}
+          editContent={this.editTaskContent}/>
       ))
     } else {
       return
