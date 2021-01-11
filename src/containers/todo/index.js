@@ -8,7 +8,6 @@ class Todo extends Component {
     input: '',
     list: [],
     completed: false,
-    search: false,
   }
 
   componentDidMount() {
