@@ -94,7 +94,7 @@ class Todo extends Component {
       return tasks.map(i => (
         <TaskCard
           key={i.id}
-          {...i}
+          data = {i}
           complete={this.completeTask}
           purge={this.deleteTask} 
           editTask={this.editTask}
